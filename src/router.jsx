@@ -19,7 +19,7 @@ const Router = () => {
                     element: <Home />
                 },
                 {
-                    path: "shop",
+                    path: "shop/:productId?",
                     element: <Shop />
                 },
                 {
