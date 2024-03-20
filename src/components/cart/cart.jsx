@@ -3,15 +3,48 @@ import styles from "./css/cart.module.css"
 
 function Cart() {
     const {cartList, products, setProducts} = useOutletContext()
-    const total = cartList?.reduce?.((prev, next) => (prev + next.price) * next.quantity,0)
+    const total = cartList?.reduce?.((prev, next) => (prev + next.price * next.quantity), 0);
+    const orderSummary = cartList?.reduce?.((prev, next) => prev + next.quantity, 0);
+    
     
     const subTotal = (id) => {
         const currentProduct = cartList?.filter?.((product) => product.id === id);
-        console.log(total)
+        
 
         return currentProduct[0].price * currentProduct[0].quantity;
     };
 
+    const handleIncreaseQuantity = (e, id) => {
+        const currentId = Number(id);
+        const quantity = Number(e.target.value);
+        
+        setProducts(products?.map?.((product) => {
+            if(product.id === currentId) {
+                return {...product, quantity: product.quantity + quantity};
+            }
+
+            return product;
+        }));
+    };
+
+    const handleDecreaseQuantity = (e, id) => {
+        const currentId = Number(id);
+        const quantity = Number(e.target.value);
+        
+        setProducts(products?.map?.((product) => {
+            if(product.id === currentId && product.quantity - quantity <= 0) {
+                return {...product, quantity: 0, bought: false};
+            }
+
+            if(product.id === currentId) {
+                return {...product, quantity: product.quantity - quantity};
+            }
+
+            return product;
+        }));
+    };
+    
+    
     const handleRemoveFromCart = (id) => {
         const currentId = Number(id);
         const removeProduct = products.map((product) => {
@@ -22,7 +55,7 @@ function Cart() {
             return product;
         });
 
-        console.log(removeProduct)
+        
         setProducts(removeProduct)
     }
 
@@ -44,7 +77,7 @@ function Cart() {
                                 </div>
 
                                 <div>
-                                    <button onClick={() => handleRemoveFromCart(product.id)}>X</button>
+                                    <button onChange={() => handleRemoveFromCart(product.id)}>X</button>
                                 </div>
                             </div>
                             {/* product details */}
@@ -73,11 +106,31 @@ function Cart() {
                                 {/* select div */}
                                 <div>
                                     <label>
-                                        <span>Quantity*</span>
+                                        <span>Increase*</span>
                                         <select
                                             name={product.title}
                                             defaultValue={1}
-                                            onChange={(e) => console.log(e.target, product.title)}
+                                            onChange={(e) => handleIncreaseQuantity(e, product.id)}
+                                        >
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </label>
+                                
+                                    <label>
+                                        <span>Decrease*</span>
+                                        <select
+                                            name={product.title}
+                                            defaultValue={1}
+                                            onChange={(e) => handleDecreaseQuantity(e, product.id)}
                                         >
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -105,7 +158,7 @@ function Cart() {
                 <div>
                     {/* total details */}
                     <div>
-                        <p>{`Order Summary: ${cartList.length}`}</p>
+                        <p>{`Order Summary: ${orderSummary} item(s)`}</p>
                         <p>{`Order Total: ${total}`}</p>
                     </div>
                 </div>
