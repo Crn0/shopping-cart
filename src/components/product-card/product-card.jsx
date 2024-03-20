@@ -1,35 +1,31 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { useLocation, Link } from "react-router-dom";
+
 import styles from "./css/product-card.module.css";
 
-function ProductCard({products, setProducts})  {
+function ProductCard({products, setProducts, productId})  {
     const [index, setIndex] = useState(0);
-    const id = useLocation().pathname?.replace(/\/[A-Za-z]{1,10}\//g, "");
-    const product = products?.find?.((product) => product.id === +id);
-
+    const id = Number(productId); 
+    const product = products?.find?.((product) => product.id === id);
+   console.log(productId)
     const handleAddToCart = (e) => {
         e.preventDefault();
         const form = e.target
         const formData = new FormData(form);
         const formJson = Object.fromEntries(formData.entries());
        
-        // console.log(formJson.selectProduct);
-
-        const newProduct = products.map((product) => {
-            if(product.id === +id) {
+        setProducts(products.map((product) => {
+            if(product.id === id) {
                 
                 return {...product, bought: true, quantity: +product?.quantity + +formJson.selectProduct};
             }
 
             return product
-        });
+        }));
         
-        setProducts(newProduct)
         
-        return;
     };
-    console.log(product)
+ 
     const handleImageChange = (e) => {
         const parent = e.target.parentElement;
         const newIndex = parent.dataset.index;
@@ -104,8 +100,9 @@ function ProductCard({products, setProducts})  {
 }
 
 ProductCard.propTypes = {
-    products: PropTypes.array,
-    setProducts: PropTypes.func,
+    products: PropTypes.array.isRequired,
+    setProducts: PropTypes.func.isRequired,
+    productId: PropTypes.number.isRequired,
 };
 
 export default ProductCard;
