@@ -74,81 +74,80 @@ function Home() {
     };
     
     
-    return (
-        <main>
-            <section className="carousel">
+return (
+    <main>
+        <section className="carousel">
+            <div>
+                <h2>{`${mensWatch?.[0].category}`}</h2>
+                <button onClick={() => handleLeftArrowClick("first")(mensWatch)}>prev</button>
+                    
+                {mensWatch?.map?.((item, index) => {
+                    return (
+                        <Fragment key={item.id}>
+                                    
+                            <img
+                                src={item.images[0]}
+                                alt={item.title}
+                                className={`${carouselIndex.first === index ? styles.active : styles.deActive}`}
+                            />
+                                    
+                        </Fragment>
+                    );
+                })}
+                    
                 <div>
-                    <h2>{"Editor's choice"}</h2>
-                    <button onClick={() => handleLeftArrowClick("first")(mensWatch)}>prev</button>
                     {mensWatch?.map?.((item, index) => {
                         return (
                             <Fragment key={item.id}>
-                                <img
-                                    src={item.images[0]}
-                                    alt={item.title}
-                    
-                                    className={`${carouselIndex.first === index ? styles.active : styles.deActive}`}
-                                    />
-                                    <Link
-                                        to={`product/${item.id}`}
-                                        className={`${carouselIndex.first === index ? styles.active : styles.deActive}`}
-                                    >
-                                        {"details"}
-                                    </Link>
-                                    <button
-                                        data-index={`${index}`}
-                                        onClick={(e) => handleCircleClick(e)("first")}
-                                    >
-                                        {index}
-                                    </button>
+                                <button
+                                    data-index={`${index}`}
+                                    onClick={(e) => handleCircleClick(e)("first")}
+                                >
+                                    {index}
+                                </button>
                             </Fragment>
-                        );
+                        )
                     })}
-                    <button onClick={() => handleRightArrowClick("first")(mensWatch)}>next</button>
                 </div>
+                <button onClick={() => handleRightArrowClick("first")(mensWatch)}>next</button>
+            </div>
 
+            <div>
+                <h2>{`${womansWatch?.[0].category}`}</h2>
+                <button onClick={() => handleLeftArrowClick("second")(womansWatch)}>prev</button>
+                    
+                {womansWatch?.map?.((item, index) => {
+                    return (
+                        <Fragment key={item.id}> 
+                            <img
+                                src={item.images[0]}
+                                alt={item.title}
+                                className={`${carouselIndex.first === index ? styles.active : styles.deActive}`}
+                            />     
+                        </Fragment>
+                    );
+                })}
+                    
                 <div>
-                    <h2>{"women"}</h2>
-                    <button onClick={() => handleLeftArrowClick("second")(womansWatch)}>prev</button>
                     {womansWatch?.map?.((item, index) => {
                         return (
                             <Fragment key={item.id}>
-                                <img
-                                    src={item.images[0]}
-                                    alt={item.title}
-                    
-                                    className={`${carouselIndex.first === index ? styles.active : styles.deActive}`}
-                                    />
-                                    <Link
-                                        to={`product/${item.id}`}
-                                        className={`${carouselIndex.first === index ? styles.active : styles.deActive}`}
-                                    >
-                                        {"details"}
-                                    </Link>
-                                    <button
-                                        data-index={`${index}`}
-                                        onClick={(e) => handleCircleClick(e)("second")}
-                                    >
-                                        {index}
-                                    </button>
+                                <button
+                                    data-index={`${index}`}
+                                    onClick={(e) => handleCircleClick(e)("second")}
+                                >
+                                    {index}
+                                </button>
                             </Fragment>
-                        );
+                        )
                     })}
-                    <button onClick={() => handleRightArrowClick("second")(womansWatch)}>next</button>
                 </div>
-             
-            </section>
+                <button onClick={() => handleRightArrowClick("second")(womansWatch)}>next</button>
+            </div>   
+        </section>
 
-           
-            <section>
-                <Link to={"shop"} className={`${styles.backgroundImage} ${styles.wFull}`}>
-                    <div>
-                        <h2>Shop now</h2>
-                    </div>
-                </Link>
-            </section>
-        </main>
-    );
+    </main>
+);
 }
 
 
