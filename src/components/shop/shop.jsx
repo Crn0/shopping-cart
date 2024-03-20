@@ -1,31 +1,8 @@
+import { useState } from "react";
 import { useOutletContext, Link, useLocation} from "react-router-dom";
 import ProductCard from "../product-card/product-card";
 import GetId from "../../helpers/get-id";
 import styles from "./css/shop.module.css"
-import { useState } from "react";
-
-// const categories = [
-//   "smartphones",
-//   "laptops",
-//   "fragrances",
-//   "skincare",
-//   "groceries",
-//   "home-decoration",
-//   "furniture",
-//   "tops",
-//   "womens-dresses",
-//   "womens-shoes",
-//   "mens-shirts",
-//   "mens-shoes",
-//   "mens-watches",
-//   "womens-watches",
-//   "womens-bags",
-//   "womens-jewellery",
-//   "sunglasses",
-//   "automotive",
-//   "motorcycle",
-//   "lighting"
-// ]
 
 function Shop() {
     const {products, setProducts} = useOutletContext();
@@ -34,7 +11,7 @@ function Shop() {
     const currentProduct = selectedCategory ? products.filter((product) => 
                                             product.category === selectedCategory)
                                             : products;
-    const categories = new Set(products.map((products) => products.category));
+    const categories = new Set(products?.map?.((products) => products.category));
     console.log(categories)
     
     const handleCategoryChange = (e) => {
@@ -46,6 +23,7 @@ function Shop() {
             {locationId ? <ProductCard 
                                 products={products}
                                 setProducts={setProducts}
+                                productId={locationId}
                           /> 
                         : (
                             <>
@@ -82,7 +60,6 @@ function Shop() {
                                             <div key={product.id}>
                                               <img src={product.images[0]} alt={product.title}/>
                                               <span>{product.title}</span>
-                                              <span>{product.price}</span>
                                               <Link to={`${product.id}`}>details</Link>
                                             </div>
                                         )
