@@ -3,12 +3,14 @@ import App from "./App";
 import Home from "./components/home/home";
 import Shop from "./components/shop/shop";
 import Cart from "./components/cart/cart";
+import ErrorPage from "./components/error-page/error-page";
 
 const Router = () => {
     const router = createBrowserRouter([
         {
             path: "/",
             element: <App />,
+            errorElement: <ErrorPage />,
             children: [
                 {
                     index: true,
