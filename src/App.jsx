@@ -6,11 +6,11 @@ import Navigation from "./components/navigation/navigation"
 function App() {
   const {products, error, loading, setProducts} = useProductUrl();
   const cartList = products?.filter?.((product) => product?.bought === true);
-    
+  
   
   if(error) return <p>error: {error}</p>
   if(loading) {
-    console.log("foo")
+    
     return <p>loading.....</p>
   }
   

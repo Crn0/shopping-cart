@@ -37,26 +37,22 @@ function Home() {
       }, [womansWatch])
     
     const leftArrow = () => (pos) => (array) => {    
-         
-        if(carouselIndex[pos] === 0) {
-            return setCarouselIndex((prevIndex) => {
-                return {...prevIndex, [pos]: array?.length - 1};
-            });
-        }
-
         setCarouselIndex((prevIndex) => {
+            if(prevIndex[pos] === 0) {
+                
+                return {...prevIndex, [pos]: array?.length - 1};
+            }
+
             return {...prevIndex, [pos]: prevIndex[pos] - 1};
         });
     };
 
     const rightArrow = () => (pos) => (array) => {
-        if(carouselIndex[pos] === array?.length - 1) {
-            return setCarouselIndex((prevIndex) => {
-                return {...prevIndex, [pos]: 0};
-            });
-        }
-
         setCarouselIndex((prevIndex) => {
+            if(prevIndex[pos] === array?.length - 1) {
+             
+                return {...prevIndex, [pos]: 0};
+            }
             return {...prevIndex, [pos]: prevIndex[pos] + 1};
         });
     };

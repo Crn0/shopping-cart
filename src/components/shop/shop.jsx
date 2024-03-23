@@ -12,7 +12,6 @@ function Shop() {
                                             product.category === selectedCategory)
                                             : products;
     const categories = new Set(products?.map?.((products) => products.category));
-    console.log(categories)
     
     const handleCategoryChange = (e) => {
         setSelectedCategory(e.target.value)

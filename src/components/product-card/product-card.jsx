@@ -1,13 +1,12 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-
 import styles from "./css/product-card.module.css";
 
 function ProductCard({products, setProducts, productId})  {
     const [index, setIndex] = useState(0);
     const id = Number(productId); 
     const product = products?.find?.((product) => product.id === id);
-   console.log(productId)
+   
     const handleAddToCart = (e) => {
         e.preventDefault();
         const form = e.target
