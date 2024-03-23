@@ -5,12 +5,11 @@ function Cart() {
     const {cartList, products, setProducts} = useOutletContext()
     const total = cartList?.reduce?.((prev, next) => (prev + next.price * next.quantity), 0);
     const orderSummary = cartList?.reduce?.((prev, next) => prev + next.quantity, 0);
-    
+   
     
     const subTotal = (id) => {
         const currentProduct = cartList?.filter?.((product) => product.id === id);
         
-
         return currentProduct[0].price * currentProduct[0].quantity;
     };
 
@@ -55,8 +54,7 @@ function Cart() {
             return product;
         });
 
-        
-        setProducts(removeProduct)
+        setProducts(removeProduct);
     }
 
     return (
@@ -77,7 +75,7 @@ function Cart() {
                                 </div>
 
                                 <div>
-                                    <button onChange={() => handleRemoveFromCart(product.id)}>X</button>
+                                    <button onClick={() => handleRemoveFromCart(product.id)}>X</button>
                                 </div>
                             </div>
                             {/* product details */}
