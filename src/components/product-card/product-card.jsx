@@ -1,11 +1,13 @@
-import PropTypes from "prop-types";
 import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import styles from "./css/product-card.module.css";
 
-function ProductCard({products, setProducts, productId})  {
+function ProductCard()  {
     const [index, setIndex] = useState(0);
+    const {products, setProducts, productId} = useOutletContext();
     const id = Number(productId); 
     const product = products?.find?.((product) => product.id === id);
+    console.log(product, "hello")
    
     const handleAddToCart = (e) => {
         e.preventDefault();
@@ -98,10 +100,10 @@ function ProductCard({products, setProducts, productId})  {
     );
 }
 
-ProductCard.propTypes = {
-    products: PropTypes.array.isRequired,
-    setProducts: PropTypes.func.isRequired,
-    productId: PropTypes.number.isRequired,
-};
+// ProductCard.propTypes = {
+//     products: PropTypes.array.isRequired,
+//     setProducts: PropTypes.func.isRequired,
+//     productId: PropTypes.number.isRequired,
+// };
 
 export default ProductCard;
