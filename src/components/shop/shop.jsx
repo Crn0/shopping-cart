@@ -1,28 +1,27 @@
 import { useState } from "react";
-import { useOutletContext, Link, useLocation} from "react-router-dom";
+import { useOutletContext, Link, useParams} from "react-router-dom";
 import ProductCard from "../product-card/product-card";
-import GetId from "../../helpers/get-id";
 import styles from "./css/shop.module.css"
 
 function Shop() {
     const {products, setProducts} = useOutletContext();
     const [selectedCategory, setSelectedCategory] = useState("");
-    const locationId = GetId(useLocation);  
+    const {productId} = useParams() 
     const currentProduct = selectedCategory ? products.filter((product) => 
                                             product.category === selectedCategory)
                                             : products;
     const categories = new Set(products?.map?.((products) => products.category));
-    
+    console.log(productId)
     const handleCategoryChange = (e) => {
         setSelectedCategory(e.target.value)
     };
 
     return (
         <main>
-            {locationId ? <ProductCard 
+            {productId ? <ProductCard 
                                 products={products}
                                 setProducts={setProducts}
-                                productId={locationId}
+                                productId={Number(productId)}
                           /> 
                         : (
                             <>
