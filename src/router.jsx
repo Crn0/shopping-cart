@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import Home from "./components/home/home";
 import Shop from "./components/shop/shop";
+import ProductCard from "./components/product-card/product-card";
 import Cart from "./components/cart/cart";
 import ErrorPage from "./components/error-page/error-page";
 
@@ -21,8 +22,14 @@ const Router = () => {
                     element: <Home />
                 },
                 {
-                    path: "shop/:productId?",
-                    element: <Shop />
+                    path: "shop",
+                    element: <Shop />,
+                    children: [
+                        {
+                            path: ":productId",
+                            element: <ProductCard />
+                        }
+                    ],
                 },
                 {
                     path: "cart",
