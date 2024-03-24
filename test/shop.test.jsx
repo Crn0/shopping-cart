@@ -20,11 +20,8 @@ vi.mock("../src/hooks/useProduct", () => {
     }
 });
 
-vi.mock("../src/components/product-card/product-card", () => {
-    return {
-        default: () => <p data-testid="product">product page</p>
-    };
-})
+
+const ProductCard = () => <p data-testid="product">product page</p>
 
 describe("Shop component", () => {
     const routes = [
@@ -33,8 +30,14 @@ describe("Shop component", () => {
             element: <App />,
             children: [
                 {
-                    path: "shop/:productId?",
+                    path: "shop",
                     element: <Shop />,
+                    children: [
+                        {
+                            path: ":productId?",
+                            element: <ProductCard />
+                        }
+                    ],
                     
                 }
                
