@@ -13,28 +13,19 @@ function Home() {
     useEffect(() => {
         const key = setInterval(() => {
             setCarouselIndex(prevIndex => {
-            if(prevIndex?.first === -1) return {...prevIndex, first: mensWatch.length - 1};
-            if(prevIndex?.first === mensWatch?.length - 1) return {...prevIndex, first: 0};
+            if(prevIndex?.first === -1 || prevIndex.second === -1) {
+                return {...prevIndex, first: mensWatch.length - 1, second: womansWatch.length - 1};
+            }
+            if(prevIndex?.first === mensWatch?.length - 1 || prevIndex?.first === mensWatch?.length - 1) {
+                return {...prevIndex, first: 0, second: 0};
+            }
             
-            return {...prevIndex, first: prevIndex.first + 1};
+            return {...prevIndex, first: prevIndex.first + 1, second: prevIndex.second + 1};
           })
         }, 2000);
     
         return () => clearInterval(key);
-      }, [mensWatch])
-
-      useEffect(() => {
-        const key = setInterval(() => {
-            setCarouselIndex(prevIndex => {
-            if(prevIndex.second === -1) return {...prevIndex, second: womansWatch.length - 1};
-            if(prevIndex.second === womansWatch?.length - 1) return {...prevIndex, second: 0};
-            
-            return {...prevIndex, second: prevIndex.second + 1};
-          })
-        }, 2000);
-    
-        return () => clearInterval(key);
-      }, [womansWatch])
+      }, [mensWatch, womansWatch])
     
     const leftArrow = () => (pos) => (array) => {    
         setCarouselIndex((prevIndex) => {
