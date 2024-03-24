@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useOutletContext, Link, useParams} from "react-router-dom";
+import { useOutletContext, Link, useParams, Outlet} from "react-router-dom";
 import ProductCard from "../product-card/product-card";
 import styles from "./css/shop.module.css"
 
@@ -18,10 +18,13 @@ function Shop() {
 
     return (
         <main>
-            {productId ? <ProductCard 
-                                products={products}
-                                setProducts={setProducts}
-                                productId={Number(productId)}
+            {productId ? <Outlet 
+                               
+                                context={{
+                                    products: products,
+                                    setProducts: setProducts,
+                                    productId: productId,
+                                }}
                           /> 
                         : (
                             <>
