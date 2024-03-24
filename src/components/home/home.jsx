@@ -26,8 +26,9 @@ function Home() {
     
         return () => clearInterval(key);
       }, [mensWatch, womansWatch])
-    
+
     const leftArrow = () => (pos) => (array) => {    
+        
         setCarouselIndex((prevIndex) => {
             if(prevIndex[pos] === 0) {
                 
@@ -109,7 +110,7 @@ return (
                             <img
                                 src={item.images[0]}
                                 alt={item.title}
-                                className={`${carouselIndex.first === index ? styles.active : styles.deActive}`}
+                                className={`${carouselIndex.second === index ? styles.active : styles.deActive}`}
                             />     
                         </Fragment>
                     );
